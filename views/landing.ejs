@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Our Video Chat App</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(to bottom right, #f8f9fa, #e0e0e0);
+      color: #333;
+      text-align: center;
+      overflow: hidden; /* Prevent scrollbars due to animation */
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      position: relative;
+      z-index: 1; /* Ensure content is above the animation */
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #4CAF50;
+      line-height: 1.4;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      text-decoration: none; /* For links styled as buttons */
+      display: inline-block; /* For consistent spacing */
+    }
+
+    .btn:hover {
+      background-color: #367c39;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Floating Objects Animation */
+    .floating-object {
+      position: absolute;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: floatAnimation 5s linear infinite;
+    }
+
+    @keyframes floatAnimation {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(20px, -20px);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    /* Add a few floating objects */
+    .obj1 {
+      width: 40px;
+      height: 40px;
+      top: 10%;
+      left: 10%;
+    }
+
+    .obj2 {
+      width: 60px;
+      height: 60px;
+      bottom: 20%;
+      right: 15%;
+      animation-duration: 7s;
+    }
+
+    .obj3 {
+      width: 30px;
+      height: 30px;
+      top: 40%;
+      right: 25%;
+      animation-duration: 4s;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-object obj1"></div>
+  <div class="floating-object obj2"></div>
+  <div class="floating-object obj3"></div>
+
+  <div class="container">
+    <h1>Welcome to Our Video Chat App</h1>
+    <p>Connect with people around the world or join an existing meeting.</p>
+    <div>
+      <a href="/random" class="btn">Random Chat</a>
+      <a href="/joinMeeting" class="btn">Join Meeting</a>
+    </div>
+  </div>
+</body>
+</html>
