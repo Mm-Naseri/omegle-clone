@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +19,8 @@
       grid-template-columns: repeat(auto-fill, 300px);
       grid-auto-rows: 300px;
       gap: 10px;
-      margin-right: 300px; /* Ensure the video grid does not overlap the chat box */
+      margin-right: 300px;
+      /* Ensure the video grid does not overlap the chat box */
       padding: 10px;
       max-width: calc(100% - 300px);
     }
@@ -48,34 +50,42 @@
 
     #messages {
       flex: 1;
-      overflow-y: auto; /* Show scrollbar when needed */
+      overflow-y: auto;
+      /* Show scrollbar when needed */
       display: flex;
       flex-direction: column;
       gap: 12px;
       padding: 10px 0;
       margin-bottom: 10px;
-      padding-right: 5px; /* Reserve space for the scrollbar */
+      padding-right: 5px;
+      /* Reserve space for the scrollbar */
     }
 
     #messages::-webkit-scrollbar {
-      width: 5px; /* Adjust the width as desired */
+      width: 5px;
+      /* Adjust the width as desired */
     }
 
     /* Track */
     #messages::-webkit-scrollbar-track {
-      background: #f1f1f1; /* Track color */
-      border-radius: 10px; /* Rounded corners for the track */
+      background: #f1f1f1;
+      /* Track color */
+      border-radius: 10px;
+      /* Rounded corners for the track */
     }
 
     /* Handle */
     #messages::-webkit-scrollbar-thumb {
-      background: #888; /* Handle color */
-      border-radius: 10px; /* Rounded corners for the handle */
+      background: #888;
+      /* Handle color */
+      border-radius: 10px;
+      /* Rounded corners for the handle */
     }
 
     /* Handle on hover */
     #messages::-webkit-scrollbar-thumb:hover {
-      background: #555; /* Darker handle color on hover */
+      background: #555;
+      /* Darker handle color on hover */
     }
 
     .message {
@@ -223,7 +233,8 @@
       margin-bottom: 10px;
       font-weight: bold;
       font-size: 1.1rem;
-      color: #4CAF50; /* Green color for labels */
+      color: #4CAF50;
+      /* Green color for labels */
     }
 
     #username-update-form input[type="text"] {
@@ -262,10 +273,38 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }
+
+    /* New Controls styling */
+    #controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10000;
+    }
+
+    #controls button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    #controls button:hover {
+      background-color: #367c39;
+    }
   </style>
 </head>
+
 <body>
-  <h1>Meeting Room</h1>
+  <h1>Omegle</h1>
 
   <div id="room-id-container">
     <span id="room-id-text" style="display: none; opacity: 0;">
@@ -286,7 +325,7 @@
     </form>
   </div>
 
-  <% if (!username || username.trim() === "") { %>
+  <% if (!username || username.trim()==="" ) { %>
     <div id="username-update-overlay">
       <form id="username-update-form">
         <label for="username-input">Enter your username:</label>
@@ -295,5 +334,13 @@
       </form>
     </div>
   <% } %>
+
+  <!-- New Controls for Mute and Video Toggle -->
+  <div id="controls">
+    <button id="muteButton">Mute</button>
+    <button id="videoToggleButton">Hide My Video</button>
+  </div>
+
 </body>
+
 </html>

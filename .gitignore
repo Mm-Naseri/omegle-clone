@@ -17,3 +17,6 @@ Thumbs.db
 
 # Editor-specific files
 .vscode/
+certs/
+logs/
+docker-compose.override.yml

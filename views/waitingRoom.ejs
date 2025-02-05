@@ -94,6 +94,7 @@
     loadingProgress.classList.add('animate');
 
     // Send a "waiting" event with your userId.
+    
     socket.emit('waiting', userIdSpan.textContent);
 
     // Listen for the matchFound event.

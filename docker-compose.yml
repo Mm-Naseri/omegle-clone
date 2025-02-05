@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: omlege-container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./certs:/usr/src/app/certs  # Mount certs securely
+    env_file:
+      - ./.env
+    restart: always
