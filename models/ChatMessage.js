@@ -1,4 +1,3 @@
-// models/ChatMessage.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database.js');
 const Meeting = require('./Meeting'); // Import Meeting model
@@ -19,7 +18,7 @@ const ChatMessage = sequelize.define('ChatMessage', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  MeetingId: {
+  MeetingId: { 
     type: DataTypes.UUID,
     allowNull: false,
     references: {
@@ -27,7 +26,7 @@ const ChatMessage = sequelize.define('ChatMessage', {
       key: 'id',
     },
   },
-  UserId: { 
+  UserId: {  
     type: DataTypes.UUID,
     allowNull: false,
     references: {
@@ -40,7 +39,7 @@ const ChatMessage = sequelize.define('ChatMessage', {
     defaultValue: DataTypes.NOW,
   },
 }, {
-  timestamps: true,
+  timestamps: true, // Keep createdAt and updatedAt for record management
 });
 
 module.exports = ChatMessage;

@@ -16,8 +16,10 @@ module.exports = function(io, waitingUsers) {
       socket.join(roomId);
       console.log(`Socket ${socket.id} with userId ${userId} and username ${username} joined room: ${roomId}`);
 
+      // Inform existing users in the room about the new user.
       socket.to(roomId).emit('user-connected', socket.id);
 
+      // Relay offer, answer, and ICE candidates
       socket.on('offer', data => {
         const { to, offer } = data;
         console.log(`Relaying offer from ${socket.id} to ${to}`);

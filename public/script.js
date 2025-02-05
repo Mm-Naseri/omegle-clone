@@ -9,7 +9,7 @@ const chatForm = document.getElementById("chat-form");
 const messagesContainer = document.getElementById("messages");
 const localVideo = document.createElement("video");
 localVideo.muted = true;
-const peers = {}; // map of peerId for RTCPeerConnection
+const peers = {}; // Map of peerId -> RTCPeerConnection
 
 let localStream;
 
@@ -166,22 +166,21 @@ if (chatForm) {
     senderName.classList.add("sender-name");
 
     if (type === "other" && sender !== USERNAME) {
-      senderName.innerText = sender;
+      senderName.innerText = sender; 
       messageContent.append(senderName);
     }
 
     const messageText = document.createElement("span");
     messageText.classList.add("message-text");
-    messageText.innerText = text;
+    messageText.innerText = text; 
 
-    messageContent.append(messageText);
+    messageContent.append(messageText); 
     msgElem.append(messageContent);
     messagesContainer.append(msgElem);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    messagesContainer.scrollTop = messagesContainer.scrollHeight; 
   }
 }
 
-// function to fetch chat history when the user joins
 function fetchChatHistory(meetingId) {
   fetch(`/chat-history/${meetingId}`)
     .then((response) => response.json())
@@ -252,12 +251,12 @@ function hideRoomId() {
     roomIdText.style.display = "none";
     copyRoomIdButton.style.display = "none";
     showRoomIdButton.style.display = "inline";
-  }, 500);
+  }, 500); 
 }
 
 showRoomIdButton.addEventListener("click", () => {
   showRoomId();
-  setTimeout(hideRoomId, 5000);
+  setTimeout(hideRoomId, 5000); 
 });
 
 const muteButton = document.getElementById("muteButton");

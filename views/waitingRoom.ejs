@@ -14,14 +14,14 @@
       height: 100vh;
       margin: 0;
       font-family: "Arial", sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
+      background-color: #f8f9fa; /* Light background */
+      color: #333; /* Dark text for contrast */
     }
 
     h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
-      color: #4CAF50;
+      color: #4CAF50; /* Green from your existing styles */
       text-align: center;
     }
 
@@ -38,7 +38,7 @@
 
     #loading-bar {
       height: 20px;
-      background-color: #e0e0e0;
+      background-color: #e0e0e0; /* Light grey for the track */
       border-radius: 10px;
       overflow: hidden;
     }
@@ -46,11 +46,12 @@
     #loading-progress {
       height: 100%;
       width: 0%;
-      background-color: #4CAF50;
+      background-color: #4CAF50; /* Green for the loading progress */
       border-radius: 10px;
       transition: width 0.5s ease-in-out;
     }
 
+    /* Loading animation */
     @keyframes loading {
       0% {
         width: 0%;
@@ -70,7 +71,7 @@
     }
 
     #loading-progress.animate {
-      animation: loading 5s linear infinite;
+      animation: loading 5s linear infinite; /* Adjust duration and timing as needed */
     }
   </style>
 </head>
@@ -89,12 +90,18 @@
     const userIdSpan = document.getElementById('user-id');
     const loadingProgress = document.getElementById('loading-progress');
 
+    // Start the loading animation
     loadingProgress.classList.add('animate');
+
+    // Send a "waiting" event with your userId.
     
     socket.emit('waiting', userIdSpan.textContent);
 
+    // Listen for the matchFound event.
     socket.on('matchFound', (meetingId) => {
+      // Stop the loading animation
       loadingProgress.classList.remove('animate');
+
       // Update the loading bar to 100%
       loadingProgress.style.width = '100%';
 

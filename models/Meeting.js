@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database.js'); // Import Sequelize instance
+const User = require('./User'); // Import the User model (although technically not directly used in attributes anymore, might be used in associations later or for type hinting)
 
 const Meeting = sequelize.define('Meeting', {
   id: {
@@ -21,7 +22,7 @@ const Meeting = sequelize.define('Meeting', {
     defaultValue: 'available'
   }
 }, {
-  timestamps: false,
+  timestamps: false
 });
 
 module.exports = Meeting;

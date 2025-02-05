@@ -12,11 +12,11 @@ MeetingParticipant.belongsTo(User, { foreignKey: 'UserId' });
 Meeting.hasMany(MeetingParticipant, { foreignKey: 'MeetingId' });
 User.hasMany(MeetingParticipant, { foreignKey: 'UserId' });
 
-Meeting.hasMany(ChatMessage, { foreignKey: 'MeetingId', as: 'chatMessages' });
-ChatMessage.belongsTo(Meeting, { foreignKey: 'MeetingId', as: 'meeting' });
+Meeting.hasMany(ChatMessage, { foreignKey: 'MeetingId', as: 'chatMessages' }); // Meeting.getChatMessages(), Meeting.createChatMessage()
+ChatMessage.belongsTo(Meeting, { foreignKey: 'MeetingId', as: 'meeting' });   // chatMessage.getMeeting()
 
-User.hasMany(ChatMessage, { foreignKey: 'UserId', as: 'sentMessages' }); 
-ChatMessage.belongsTo(User, { foreignKey: 'UserId', as: 'sender' });
+User.hasMany(ChatMessage, { foreignKey: 'UserId', as: 'sentMessages' });     // User.getSentMessages()
+ChatMessage.belongsTo(User, { foreignKey: 'UserId', as: 'sender' });        // chatMessage.getSender()
 
 
 module.exports = {

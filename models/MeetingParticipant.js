@@ -16,7 +16,7 @@ const MeetingParticipant = sequelize.define('MeetingParticipant', {
     type: DataTypes.UUID,
     primaryKey: true,
     references: {
-      model: User,
+      model: User,    
       key: 'id'
     }
   }
@@ -25,7 +25,7 @@ const MeetingParticipant = sequelize.define('MeetingParticipant', {
   indexes: [
     {
       unique: true,
-      fields: ['MeetingId', 'UserId']
+      fields: ['MeetingId', 'UserId'] 
     }
   ]
 });
