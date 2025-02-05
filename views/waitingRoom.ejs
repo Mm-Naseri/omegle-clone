@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,15 +56,19 @@
       0% {
         width: 0%;
       }
+
       25% {
         width: 25%;
       }
+
       50% {
         width: 50%;
       }
+
       75% {
         width: 75%;
       }
+
       100% {
         width: 100%;
       }
@@ -74,9 +79,12 @@
     }
   </style>
 </head>
+
 <body>
   <h1>Waiting for a partner...</h1>
-  <p>Your user ID: <span id="user-id"><%= userId %></span></p>
+  <p>Your user ID: <span id="user-id">
+      <%= userId %>
+    </span></p>
 
   <div id="loading-container">
     <div id="loading-bar">
@@ -90,7 +98,7 @@
     const loadingProgress = document.getElementById('loading-progress');
 
     loadingProgress.classList.add('animate');
-    
+
     socket.emit('waiting', userIdSpan.textContent);
 
     socket.on('matchFound', (meetingId) => {
@@ -105,4 +113,5 @@
     });
   </script>
 </body>
+
 </html>

@@ -1,7 +1,7 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-    logging: false, // Disable Sequelize logging
-  });
+  logging: false, // Disable Sequelize logging
+});
 
 module.exports = sequelize;

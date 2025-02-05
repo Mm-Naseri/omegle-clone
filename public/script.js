@@ -193,40 +193,39 @@ function fetchChatHistory(meetingId) {
     .catch(console.error);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const usernameForm = document.getElementById('username-update-form');
+document.addEventListener("DOMContentLoaded", function () {
+  const usernameForm = document.getElementById("username-update-form");
   if (usernameForm) {
-    usernameForm.addEventListener('submit', function(e) {
+    usernameForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const usernameValue = document.getElementById('username-input').value.trim();
+      const usernameValue = document.getElementById("username-input").value.trim();
       if (usernameValue) {
         fetch(`${window.location.origin}/updateUsername`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `userId=${USER_ID}&username=${encodeURIComponent(usernameValue)}`
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `userId=${USER_ID}&username=${encodeURIComponent(usernameValue)}`,
         })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            socket.emit('update-username', usernameValue);
-            console.log('Username updated successfully to:', usernameValue);
-            const overlay = document.getElementById('username-update-overlay');
-            if (overlay) {
-              overlay.remove();
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              socket.emit("update-username", usernameValue);
+              console.log("Username updated successfully to:", usernameValue);
+              const overlay = document.getElementById("username-update-overlay");
+              if (overlay) {
+                overlay.remove();
+              }
+            } else {
+              console.error("Username update failed:", data.error);
             }
-          } else {
-            console.error('Username update failed:', data.error);
-          }
-        })
-        .catch(console.error);
+          })
+          .catch(console.error);
       }
     });
   }
 });
 
-
 copyRoomIdButton.addEventListener("click", () => {
-  const meetingId = roomIdText.textContent.replace('Room ID: ', '').trim();
+  const meetingId = roomIdText.textContent.replace("Room ID: ", "").trim();
   navigator.clipboard
     .writeText(meetingId)
     .then(() => {
