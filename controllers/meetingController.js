@@ -71,7 +71,7 @@ exports.joinMeeting = async (req, res, io) => {
       return res.status(429).send("Meeting is full. Maximum participants reached.");
     }
 
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(userId.trim());
     if (!user) return res.status(400).send("User not found");
 
     await MeetingParticipant.create({ MeetingId: meetingId, UserId: userId });
