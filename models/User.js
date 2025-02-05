@@ -1,11 +1,10 @@
-// models/User.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database.js'); // Import Sequelize instance
+const sequelize = require('../config/database.js');
 
 const User = sequelize.define('User', {
   id: {
     type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,  // Automatically generates a UUID v4.
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull: false,
   },
@@ -22,7 +21,7 @@ const User = sequelize.define('User', {
     defaultValue: 'available'
   }
 }, {
-  timestamps: true, // Enable Sequelize's automatic timestamps (createdAt, updatedAt)
+  timestamps: true,
 });
 
 module.exports = User;

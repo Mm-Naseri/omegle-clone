@@ -1,15 +1,14 @@
-// models/MeetingParticipant.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database.js');
-const Meeting = require('./Meeting'); // Import the Meeting model class
-const User = require('./User');     // Import the User model class
+const Meeting = require('./Meeting');
+const User = require('./User');
 
 const MeetingParticipant = sequelize.define('MeetingParticipant', {
     MeetingId: {
     type: DataTypes.UUID,
     primaryKey: true,
     references: {
-      model: Meeting, // Referencing the Meeting model class
+      model: Meeting,
       key: 'id'
     }
   },
@@ -17,16 +16,16 @@ const MeetingParticipant = sequelize.define('MeetingParticipant', {
     type: DataTypes.UUID,
     primaryKey: true,
     references: {
-      model: User,     // Referencing the User model class
+      model: User,
       key: 'id'
     }
   }
 }, {
-  timestamps: true, // Creates createdAt and updatedAt
+  timestamps: true,
   indexes: [
     {
       unique: true,
-      fields: ['MeetingId', 'UserId'] // Composite unique index
+      fields: ['MeetingId', 'UserId']
     }
   ]
 });

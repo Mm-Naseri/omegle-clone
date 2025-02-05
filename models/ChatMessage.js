@@ -12,14 +12,14 @@ const ChatMessage = sequelize.define('ChatMessage', {
     allowNull: false,
   },
   message_text: {
-    type: DataTypes.TEXT, // Use TEXT for longer messages
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   username: {
-    type: DataTypes.STRING, // Store username for display even if user is deleted
+    type: DataTypes.STRING,
     allowNull: false,
   },
-  MeetingId: { // Changed to PascalCase: MeetingId
+  MeetingId: {
     type: DataTypes.UUID,
     allowNull: false,
     references: {
@@ -27,7 +27,7 @@ const ChatMessage = sequelize.define('ChatMessage', {
       key: 'id',
     },
   },
-  UserId: {     // Changed to PascalCase: UserId (Optional FK to User)
+  UserId: { 
     type: DataTypes.UUID,
     allowNull: false,
     references: {
@@ -40,7 +40,7 @@ const ChatMessage = sequelize.define('ChatMessage', {
     defaultValue: DataTypes.NOW,
   },
 }, {
-  timestamps: true, // Keep createdAt and updatedAt for record management
+  timestamps: true,
 });
 
 module.exports = ChatMessage;

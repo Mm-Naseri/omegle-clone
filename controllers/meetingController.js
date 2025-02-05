@@ -1,4 +1,3 @@
-// controllers/meetingController.js
 const { v4: uuidV4 } = require('uuid');
 const { Op } = require('sequelize');
 const { User, Meeting, MeetingParticipant } = require('../models');

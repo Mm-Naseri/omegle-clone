@@ -1,4 +1,3 @@
-// controllers/chatController.js
 const { ChatMessage } = require('../models');
 
 exports.getChatHistory = async (req, res) => {

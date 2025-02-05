@@ -1,4 +1,3 @@
-// Create a single socket connection.
 const socket = io("/");
 
 const videoGrid = document.getElementById("video-grid");
@@ -8,26 +7,22 @@ const showRoomIdButton = document.getElementById("show-room-id-button");
 const copyRoomIdButton = document.getElementById("copy-room-id-button");
 const chatForm = document.getElementById("chat-form");
 const messagesContainer = document.getElementById("messages");
-// Create local video element and mute it
 const localVideo = document.createElement("video");
 localVideo.muted = true;
-const peers = {}; // Map of peerId -> RTCPeerConnection
+const peers = {}; // map of peerId for RTCPeerConnection
 
 let localStream;
 
-// ICE configuration – adjust if needed.
 const configuration = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
 };
 
-// Function to append messages
 function appendMessage(text) {
   const msgElem = document.createElement("div");
   msgElem.innerText = text;
   messagesContainer.append(msgElem);
 }
 
-// Fetch chat history for the meeting
 function fetchChatHistory(meetingId) {
   fetch(`/chat-history/${meetingId}`)
     .then((response) => response.json())
@@ -41,14 +36,12 @@ function fetchChatHistory(meetingId) {
     });
 }
 
-// Get local media stream
 navigator.mediaDevices
   .getUserMedia({ video: true, audio: true })
   .then((stream) => {
     localStream = stream;
     addVideoStream(localVideo, stream);
 
-    // Immediately join the room with ROOM_ID, USER_ID, and USERNAME (default "Anonymous" if not set)
     socket.emit("join-room", ROOM_ID, USER_ID, USERNAME);
 
     fetchChatHistory(ROOM_ID);
@@ -141,14 +134,12 @@ function addVideoStream(video, stream) {
   videoGrid.append(video);
 }
 
-// Optionally stop local media on page unload
 window.addEventListener("beforeunload", () => {
   if (localStream) {
     localStream.getTracks().forEach((track) => track.stop());
   }
 });
 
-// Chat functionality
 if (chatForm) {
   const chatInput = document.getElementById("chat-input");
 
@@ -157,13 +148,13 @@ if (chatForm) {
     const message = chatInput.value.trim();
     if (message) {
       socket.emit("chat-message", { room: ROOM_ID, message });
-      appendMessage(message, "user"); // Append the user's own message with 'user' class
+      appendMessage(message, "user");
       chatInput.value = "";
     }
   });
 
   socket.on("chat-message", (data) => {
-    appendMessage(data.message, "other", data.sender); // Append other users' messages with 'other' class and their username
+    appendMessage(data.message, "other", data.sender);
   });
 
   function appendMessage(text, type, sender) {
@@ -175,22 +166,22 @@ if (chatForm) {
     senderName.classList.add("sender-name");
 
     if (type === "other" && sender !== USERNAME) {
-      senderName.innerText = sender; // Add the sender's username
-      messageContent.append(senderName); // Append the username
+      senderName.innerText = sender;
+      messageContent.append(senderName);
     }
 
     const messageText = document.createElement("span");
     messageText.classList.add("message-text");
-    messageText.innerText = text; // Add the message text
+    messageText.innerText = text;
 
-    messageContent.append(messageText); // Append the message content
+    messageContent.append(messageText);
     msgElem.append(messageContent);
     messagesContainer.append(msgElem);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Auto scroll to the latest message
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 }
 
-// Function to fetch chat history when the user joins
+// function to fetch chat history when the user joins
 function fetchChatHistory(meetingId) {
   fetch(`/chat-history/${meetingId}`)
     .then((response) => response.json())
@@ -202,7 +193,6 @@ function fetchChatHistory(meetingId) {
     .catch(console.error);
 }
 
-// Handle inline username update without a page reload
 document.addEventListener('DOMContentLoaded', function() {
   const usernameForm = document.getElementById('username-update-form');
   if (usernameForm) {
@@ -218,10 +208,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            // Emit an event so the server updates the socket's username.
             socket.emit('update-username', usernameValue);
             console.log('Username updated successfully to:', usernameValue);
-            // Remove the overlay without reloading the page.
             const overlay = document.getElementById('username-update-overlay');
             if (overlay) {
               overlay.remove();
@@ -237,8 +225,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Handle Room ID copying functionality
-// (Note: 'copyButton' was replaced by copyRoomIdButton below)
 copyRoomIdButton.addEventListener("click", () => {
   const meetingId = roomIdText.textContent.replace('Room ID: ', '').trim();
   navigator.clipboard
@@ -251,35 +237,29 @@ copyRoomIdButton.addEventListener("click", () => {
     });
 });
 
-// Toggle the Room ID visibility
 function showRoomId() {
   roomIdText.style.display = "inline";
   copyRoomIdButton.style.display = "inline";
   showRoomIdButton.style.display = "none";
-  // Use requestAnimationFrame to ensure the display changes are rendered before changing opacity
   requestAnimationFrame(() => {
     roomIdText.style.opacity = 1;
   });
 }
 
-// Function to hide the room ID (and show the button)
 function hideRoomId() {
   roomIdText.style.opacity = 0;
-  // Delay hiding the elements until after the transition is complete
   setTimeout(() => {
     roomIdText.style.display = "none";
     copyRoomIdButton.style.display = "none";
     showRoomIdButton.style.display = "inline";
-  }, 500); // The duration should match the transition duration
+  }, 500);
 }
 
-// Add click event to toggle Room ID visibility
 showRoomIdButton.addEventListener("click", () => {
   showRoomId();
-  setTimeout(hideRoomId, 5000); // Hide the Room ID after 5 seconds
+  setTimeout(hideRoomId, 5000);
 });
 
-// ***** New Functionality for Audio and Video Toggle *****
 const muteButton = document.getElementById("muteButton");
 const videoToggleButton = document.getElementById("videoToggleButton");
 let isMuted = false;
@@ -287,7 +267,6 @@ let isVideoHidden = false;
 
 muteButton.addEventListener("click", () => {
   if (!localStream) return;
-  // Toggle audio tracks
   localStream.getAudioTracks().forEach((track) => {
     track.enabled = !track.enabled;
   });
@@ -297,12 +276,10 @@ muteButton.addEventListener("click", () => {
 
 videoToggleButton.addEventListener("click", () => {
   if (!localStream) return;
-  // Toggle video tracks
   localStream.getVideoTracks().forEach((track) => {
     track.enabled = !track.enabled;
   });
   isVideoHidden = !isVideoHidden;
-  // Additionally, hide or show the local video element in the video grid
   localVideo.style.display = isVideoHidden ? "none" : "";
   videoToggleButton.innerText = isVideoHidden ? "Show My Video" : "Hide My Video";
 });

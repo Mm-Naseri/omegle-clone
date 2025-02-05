@@ -1,4 +1,3 @@
-// controllers/userController.js
 const { User } = require('../models');
 
 exports.updateUsername = async (req, res) => {
@@ -9,7 +8,6 @@ exports.updateUsername = async (req, res) => {
       { username },
       { where: { id: userId } }
     );
-    // Return a JSON response indicating success.
     res.status(200).json({ success: true, username });
   } catch (err) {
     console.error(err);

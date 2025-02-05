@@ -13,14 +13,12 @@
   <script src="script.js" defer></script>
   <title>Video Chat Room</title>
   <style>
-    /* Video grid styles */
     #video-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, 300px);
       grid-auto-rows: 300px;
       gap: 10px;
       margin-right: 300px;
-      /* Ensure the video grid does not overlap the chat box */
       padding: 10px;
       max-width: calc(100% - 300px);
     }
@@ -33,7 +31,6 @@
       border-radius: 10px;
     }
 
-    /* Chat container styles */
     #chat-container {
       position: fixed;
       right: 0;
@@ -51,41 +48,30 @@
     #messages {
       flex: 1;
       overflow-y: auto;
-      /* Show scrollbar when needed */
       display: flex;
       flex-direction: column;
       gap: 12px;
       padding: 10px 0;
       margin-bottom: 10px;
       padding-right: 5px;
-      /* Reserve space for the scrollbar */
     }
 
     #messages::-webkit-scrollbar {
       width: 5px;
-      /* Adjust the width as desired */
     }
 
-    /* Track */
     #messages::-webkit-scrollbar-track {
       background: #f1f1f1;
-      /* Track color */
       border-radius: 10px;
-      /* Rounded corners for the track */
     }
 
-    /* Handle */
     #messages::-webkit-scrollbar-thumb {
       background: #888;
-      /* Handle color */
       border-radius: 10px;
-      /* Rounded corners for the handle */
     }
 
-    /* Handle on hover */
     #messages::-webkit-scrollbar-thumb:hover {
       background: #555;
-      /* Darker handle color on hover */
     }
 
     .message {
@@ -234,7 +220,6 @@
       font-weight: bold;
       font-size: 1.1rem;
       color: #4CAF50;
-      /* Green color for labels */
     }
 
     #username-update-form input[type="text"] {
@@ -274,7 +259,6 @@
       transform: translateY(-2px);
     }
 
-    /* New Controls styling */
     #controls {
       position: fixed;
       bottom: 20px;
@@ -308,7 +292,8 @@
 
   <div id="room-id-container">
     <span id="room-id-text" style="display: none; opacity: 0;">
-      <strong>Room ID:</strong> <%= roomId %>
+      <strong>Room ID:</strong>
+      <%= roomId %>
     </span>
     <button id="show-room-id-button">Show Room ID</button>
     <button id="copy-room-id-button">Copy</button>
@@ -333,13 +318,13 @@
         <button type="submit">Update Username</button>
       </form>
     </div>
-  <% } %>
+    <% } %>
 
-  <!-- New Controls for Mute and Video Toggle -->
-  <div id="controls">
-    <button id="muteButton">Mute</button>
-    <button id="videoToggleButton">Hide My Video</button>
-  </div>
+      <!-- Controls for Mute and Video Toggle -->
+      <div id="controls">
+        <button id="muteButton">Mute</button>
+        <button id="videoToggleButton">Hide My Video</button>
+      </div>
 
 </body>
 
